@@ -9,7 +9,9 @@ export default function TopBar() {
 					<Grid.Column width={8} className='top-bar__left'>
 						<Logo />
 					</Grid.Column>
-					<Grid.Column width={8} className='top-bar__right'></Grid.Column>
+					<Grid.Column width={8} className='top-bar__right'>
+						<Search />
+					</Grid.Column>
 				</Grid>
 			</Container>
 		</div>
@@ -24,4 +26,8 @@ function Logo() {
 			</a>
 		</Link>
 	);
+}
+
+function Search() {
+	return <Input id='serach-id' icon={{ name: 'search' }} />;
 }
