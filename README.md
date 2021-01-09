@@ -1,0 +1,2 @@
+# ecommerce-udemy
+Gracias a este curso aprenderás desde a crear tu propia tienda online (E-Commerce) desde cero usando Next JS, Strapi y Stripe.  Serás capaz de crear un ecosistema por microservicios donde tendrás desacoplado el backend del frontend, crearas tu propio sistema de carrito integrando una pasarela de pago como es Stripe y así poder realizar compras reales, crearas tu propia tienda online desde cero
