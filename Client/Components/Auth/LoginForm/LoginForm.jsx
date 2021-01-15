@@ -3,13 +3,26 @@ import { Form, Button } from 'semantic-ui-react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
+import { loginApi } from '../../../Api/User';
 
 export default function LoginForm(props) {
-	const { showRegisterForm } = props;
+	const { showRegisterForm, onCloseModal } = props;
+	const [loading, setLoading] = useState(false);
 	const formik = useFormik({
 		initialValues: initialValues(),
 		validationSchema: Yup.object(validationSchema()),
-		onSubmit: (formData) => {},
+		onSubmit: async (formData) => {
+			setLoading(true);
+			const response = await loginApi(formData);
+			setLoading(false);
+			if (response?.jwt) {
+				console.log(response.user.name);
+				toast.success(`Bienvenido ${response.user?.name}!`);
+				onCloseModal();
+			} else {
+				toast.error('Usuario y/o Contraseña incorrecto');
+			}
+		},
 	});
 
 	return (
@@ -33,7 +46,7 @@ export default function LoginForm(props) {
 					Registrarse
 				</Button>
 				<div className=''>
-					<Button className='submit' type='submit'>
+					<Button className='submit' type='submit' loading={loading}>
 						Entrar
 					</Button>
 					<Button type='button'>¿Has olvidado la contraseña?</Button>
