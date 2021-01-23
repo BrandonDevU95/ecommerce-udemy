@@ -4,10 +4,12 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { loginApi } from '../../../Api/User';
+import useAuth from '../../../Hook/useAuth';
 
 export default function LoginForm(props) {
 	const { showRegisterForm, onCloseModal } = props;
 	const [loading, setLoading] = useState(false);
+	const auth = useAuth();
 	const formik = useFormik({
 		initialValues: initialValues(),
 		validationSchema: Yup.object(validationSchema()),
