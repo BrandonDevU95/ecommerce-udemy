@@ -2,7 +2,8 @@ import { useMemo, useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import AuthContext from '../Context/AuthContext';
 import jwtDecode from 'jwt-decode';
-import { setToken, getToken } from '../Api/Token';
+import { useRouter } from 'next/router';
+import { setToken, getToken, removeToken } from '../Api/Token';
 import '../Scss/global.scss';
 import 'semantic-ui-css/semantic.min.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,9 +11,10 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function MyApp({ Component, pageProps }) {
 	const [auth, setAuth] = useState(undefined);
 	const [reloadUser, setReloadUser] = useState(false);
+	const router = useRouter();
 
 	useEffect(() => {
-		const toke = getToken();
+		const token = getToken();
 		if (token) {
 			setAuth({
 				token,
@@ -32,11 +34,19 @@ export default function MyApp({ Component, pageProps }) {
 		});
 	};
 
+	const logout = () => {
+		if (auth) {
+			removeToken();
+			setAuth(null);
+			router.push('/');
+		}
+	};
+
 	const authData = useMemo(
 		() => ({
 			auth,
 			login,
-			logout: () => null,
+			logout,
 			setReloadUser,
 		}),
 		[auth]
