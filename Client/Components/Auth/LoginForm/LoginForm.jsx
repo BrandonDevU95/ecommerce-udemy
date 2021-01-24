@@ -9,7 +9,7 @@ import useAuth from '../../../Hook/useAuth';
 export default function LoginForm(props) {
 	const { showRegisterForm, onCloseModal } = props;
 	const [loading, setLoading] = useState(false);
-	const auth = useAuth();
+	const { login } = useAuth();
 	const formik = useFormik({
 		initialValues: initialValues(),
 		validationSchema: Yup.object(validationSchema()),
@@ -18,7 +18,7 @@ export default function LoginForm(props) {
 			const response = await loginApi(formData);
 			setLoading(false);
 			if (response?.jwt) {
-				console.log(response.user.name);
+				login(response.jwt);
 				toast.success(`Bienvenido ${response.user?.name}!`);
 				onCloseModal();
 			} else {
