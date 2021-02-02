@@ -25,17 +25,17 @@ export default function account() {
 
 	return (
 		<BasicLayout className='account'>
-			<Configuration user={user} />
+			<Configuration user={user} logout={logout} />
 		</BasicLayout>
 	);
 }
 
-function Configuration({ user }) {
+function Configuration({ user, logout }) {
 	return (
 		<div className='account__configuration'>
 			<div className='title'>Configuracion</div>
 			<div className='data'>
-				<ChangeNameForm user={user} />
+				<ChangeNameForm user={user} logout={logout} />
 			</div>
 		</div>
 	);
