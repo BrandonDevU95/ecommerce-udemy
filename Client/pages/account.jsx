@@ -3,6 +3,7 @@ import BasicLayout from '../Layouts/BasicLayout';
 import { useRouter } from 'next/router';
 import useAuth from '../Hook/useAuth';
 import { getMeApi } from '../Api/User';
+import ChangeNameForm from '../Components/Account/ChangeNameForm/ChangeNameForm';
 
 export default function account() {
 	const [user, setUser] = useState(undefined);
@@ -24,16 +25,18 @@ export default function account() {
 
 	return (
 		<BasicLayout className='account'>
-			<Configuration />
+			<Configuration user={user} />
 		</BasicLayout>
 	);
 }
 
-function Configuration() {
+function Configuration({ user }) {
 	return (
 		<div className='account__configuration'>
 			<div className='title'>Configuracion</div>
-			<div className='data'>Formularios de configuracion</div>
+			<div className='data'>
+				<ChangeNameForm user={user} />
+			</div>
 		</div>
 	);
 }
