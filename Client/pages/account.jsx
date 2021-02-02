@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import BasicLayout from '../Layouts/BasicLayout';
 import { useRouter } from 'next/router';
+import { Icon } from 'semantic-ui-react';
 import useAuth from '../Hook/useAuth';
 import { getMeApi } from '../Api/User';
 import ChangeNameForm from '../Components/Account/ChangeNameForm/ChangeNameForm';
@@ -28,6 +29,7 @@ export default function account() {
 	return (
 		<BasicLayout className='account'>
 			<Configuration user={user} logout={logout} setReloadUser={setReloadUser} />
+			<Addresses />
 		</BasicLayout>
 	);
 }
@@ -40,6 +42,20 @@ function Configuration({ user, logout, setReloadUser }) {
 				<ChangeNameForm user={user} logout={logout} setReloadUser={setReloadUser} />
 				<ChangeEmailForm user={user} logout={logout} setReloadUser={setReloadUser} />
 				<ChangePasswordForm user={user} logout={logout} />
+			</div>
+		</div>
+	);
+}
+
+function Addresses() {
+	return (
+		<div className='account__addresses'>
+			<div className='title'>
+				Direcciones
+				<Icon name='plus' link />
+			</div>
+			<div className='data'>
+				<p>Lista de direcciones</p>
 			</div>
 		</div>
 	);
