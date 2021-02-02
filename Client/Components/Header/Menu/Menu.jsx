@@ -30,7 +30,7 @@ export default function MenuWeb() {
 						<MenuPlatforms />
 					</Grid.Column>
 					<Grid.Column className='menu__right' width={10}>
-						{auth ? <button onClick={logout}>Cerrar Sesion</button> : <MenuOptions onShowModal={onShowModal} />}
+						{user !== undefined && <MenuOptions onShowModal={onShowModal} user={user} logout={logout} />}
 					</Grid.Column>
 				</Grid>
 			</Container>
@@ -58,13 +58,45 @@ function MenuPlatforms() {
 }
 
 function MenuOptions(props) {
-	const { onShowModal } = props;
+	const { onShowModal, user, logout } = props;
 	return (
 		<Menu>
-			<Menu.Item onClick={onShowModal}>
-				<Icon name='user outline' />
-				Mi Cuenta
-			</Menu.Item>
+			{user ? (
+				<>
+					<Link href='/orders' as='a'>
+						<Menu.Item>
+							<Icon name='game' />
+							Mis Pedidos
+						</Menu.Item>
+					</Link>
+					<Link href='/wishlist' as='a'>
+						<Menu.Item>
+							<Icon name='heart outline' />
+							Wishlist
+						</Menu.Item>
+					</Link>
+					<Link href='/account' as='a'>
+						<Menu.Item>
+							<Icon name='user outline' />
+							{user.name} {user.lastname}
+						</Menu.Item>
+					</Link>
+					<Link href='/cart' as='a'>
+						<Menu.Item className='m-0'>
+							<Icon name='cart' />
+						</Menu.Item>
+					</Link>
+
+					<Menu.Item onClick={logout} className='m-0'>
+						<Icon name='power off' />
+					</Menu.Item>
+				</>
+			) : (
+				<Menu.Item onClick={onShowModal}>
+					<Icon name='user outline' />
+					Mi Cuenta
+				</Menu.Item>
+			)}
 		</Menu>
 	);
 }
