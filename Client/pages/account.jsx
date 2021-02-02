@@ -1,9 +1,39 @@
+import { useEffect, useState } from 'react';
 import BasicLayout from '../Layouts/BasicLayout';
+import { useRouter } from 'next/router';
+import useAuth from '../Hook/useAuth';
+import { getMeApi } from '../Api/User';
 
 export default function account() {
+	const [user, setUser] = useState(undefined);
+	const { auth, logout } = useAuth();
+	const router = useRouter();
+
+	useEffect(() => {
+		(async () => {
+			const response = await getMeApi(logout);
+			setUser(response || null);
+		})();
+	}, [auth]);
+
+	if (user === undefined) return null;
+	if (!auth && !user) {
+		router.replace('/');
+		return null;
+	}
+
 	return (
-		<BasicLayout>
-			<h1>Esmas en mi cuenta</h1>
+		<BasicLayout className='account'>
+			<Configuration />
 		</BasicLayout>
+	);
+}
+
+function Configuration() {
+	return (
+		<div className='account__configuration'>
+			<div className='title'>Configuracion</div>
+			<div className='data'>Formularios de configuracion</div>
+		</div>
 	);
 }
