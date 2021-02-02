@@ -5,6 +5,7 @@ import useAuth from '../Hook/useAuth';
 import { getMeApi } from '../Api/User';
 import ChangeNameForm from '../Components/Account/ChangeNameForm/ChangeNameForm';
 import ChangeEmailForm from '../Components/Account/ChangeEmailForm/ChangeEmailForm';
+import ChangePasswordForm from '../Components/Account/ChangePasswordForm/ChangePasswordForm';
 
 export default function account() {
 	const [user, setUser] = useState(undefined);
@@ -38,6 +39,7 @@ function Configuration({ user, logout, setReloadUser }) {
 			<div className='data'>
 				<ChangeNameForm user={user} logout={logout} setReloadUser={setReloadUser} />
 				<ChangeEmailForm user={user} logout={logout} setReloadUser={setReloadUser} />
+				<ChangePasswordForm user={user} logout={logout} />
 			</div>
 		</div>
 	);
