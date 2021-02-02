@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import useAuth from '../Hook/useAuth';
 import { getMeApi } from '../Api/User';
 import ChangeNameForm from '../Components/Account/ChangeNameForm/ChangeNameForm';
+import ChangeEmailForm from '../Components/Account/ChangeEmailForm/ChangeEmailForm';
 
 export default function account() {
 	const [user, setUser] = useState(undefined);
@@ -36,6 +37,7 @@ function Configuration({ user, logout, setReloadUser }) {
 			<div className='title'>Configuracion</div>
 			<div className='data'>
 				<ChangeNameForm user={user} logout={logout} setReloadUser={setReloadUser} />
+				<ChangeEmailForm user={user} logout={logout} setReloadUser={setReloadUser} />
 			</div>
 		</div>
 	);
