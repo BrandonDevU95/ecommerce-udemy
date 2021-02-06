@@ -7,6 +7,7 @@ import { getMeApi } from '../Api/User';
 import ChangeNameForm from '../Components/Account/ChangeNameForm/ChangeNameForm';
 import ChangeEmailForm from '../Components/Account/ChangeEmailForm/ChangeEmailForm';
 import ChangePasswordForm from '../Components/Account/ChangePasswordForm/ChangePasswordForm';
+import BasicModal from '../Components/Modal/BasicModal';
 
 export default function account() {
 	const [user, setUser] = useState(undefined);
@@ -48,15 +49,28 @@ function Configuration({ user, logout, setReloadUser }) {
 }
 
 function Addresses() {
+	const [showModal, setShowModal] = useState(false);
+	const [titleModal, setTitleModal] = useState('');
+	const [formModal, setFormModal] = useState(null);
+
+	const openModal = (title) => {
+		setTitleModal(title);
+		setFormModal(<h1>New Adress...</h1>);
+		setShowModal(true);
+	};
+
 	return (
 		<div className='account__addresses'>
 			<div className='title'>
 				Direcciones
-				<Icon name='plus' link />
+				<Icon name='plus' link onClick={() => openModal('Nueva Direccion')} />
 			</div>
 			<div className='data'>
 				<p>Lista de direcciones</p>
 			</div>
+			<BasicModal show={showModal} setShow={setShowModal} title={titleModal}>
+				<p>Formulario modal...</p>
+			</BasicModal>
 		</div>
 	);
 }
