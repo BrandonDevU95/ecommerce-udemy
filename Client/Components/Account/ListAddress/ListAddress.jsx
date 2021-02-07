@@ -3,8 +3,10 @@ import { getAddressesApi } from '../../../Api/Address';
 import useAuth from '../../../Hook/useAuth';
 
 export default function ListAddress() {
-	const { auth, logout } = useAuth();
 	const [addresses, setAddresses] = useState(null);
+	const { auth, logout } = useAuth();
+
+	console.log(addresses);
 
 	useEffect(() => {
 		(async () => {

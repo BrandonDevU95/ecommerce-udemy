@@ -23,7 +23,7 @@ export async function getAddressesApi(idUser, logout) {
 	try {
 		const url = `${BASE_PATH}/addresses?users_permissions_user=${idUser}`;
 		const result = await authFetch(url, null, logout);
-		if (result.statusCode !== 500) throw 'Error del Servidor';
+		if (result.statusCode === 500) throw 'Error del Servidor';
 		return result;
 	} catch (error) {
 		console.log(error);
