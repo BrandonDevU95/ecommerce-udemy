@@ -6,14 +6,14 @@ import useAuth from '../../../Hook/useAuth';
 import { createAddressApi } from '../../../Api/Address.js';
 import { toast } from 'react-toastify';
 
-export default function AddressForm({ setShowModal, setReloadAddresses }) {
+export default function AddressForm({ setShowModal, setReloadAddresses, newAddress, address }) {
 	const [loading, setLoading] = useState(false);
 	const { auth, logout } = useAuth();
 	const formik = useFormik({
-		initialValues: initialValues(),
+		initialValues: initialValues(address),
 		validationSchema: Yup.object(validationSchema()),
 		onSubmit: (formData) => {
-			createAddress(formData);
+			newAddress ? createAddress(formData) : updateAddress(formData);
 		},
 	});
 
@@ -33,6 +33,10 @@ export default function AddressForm({ setShowModal, setReloadAddresses }) {
 			setLoading(false);
 			setShowModal(false);
 		}
+	};
+
+	const updateAddress = (formData) => {
+		console.log('Actualizando...');
 	};
 
 	return (
@@ -108,22 +112,22 @@ export default function AddressForm({ setShowModal, setReloadAddresses }) {
 			</Form.Group>
 			<div className='actions'>
 				<Button className='submit' type='submit' loading={loading}>
-					Crear Dirección
+					{newAddress ? 'Crear Dirección' : 'Actualizar Dirección'}
 				</Button>
 			</div>
 		</Form>
 	);
 }
 
-function initialValues() {
+function initialValues(address) {
 	return {
-		title: '',
-		name: '',
-		address: '',
-		city: '',
-		state: '',
-		postalCode: '',
-		phone: '',
+		title: address?.title || '',
+		name: address?.name || '',
+		address: address?.address || '',
+		city: address?.city || '',
+		state: address?.state || '',
+		postalCode: address?.postalcode || '',
+		phone: address?.phone || '',
 	};
 }
 

@@ -4,7 +4,7 @@ import useAuth from '../../../Hook/useAuth';
 import { map, size } from 'lodash';
 import { Grid, Button } from 'semantic-ui-react';
 
-export default function ListAddress({ reloadAddresses, setReloadAddresses }) {
+export default function ListAddress({ reloadAddresses, setReloadAddresses, openModal }) {
 	const [addresses, setAddresses] = useState(null);
 	const { auth, logout } = useAuth();
 
@@ -26,7 +26,12 @@ export default function ListAddress({ reloadAddresses, setReloadAddresses }) {
 				<Grid>
 					{map(addresses, (address) => (
 						<Grid.Column key={address.id} mobile={16} tablet={8} computer={4}>
-							<Address address={address} logout={logout} setReloadAddresses={setReloadAddresses} />
+							<Address
+								address={address}
+								logout={logout}
+								setReloadAddresses={setReloadAddresses}
+								openModal={openModal}
+							/>
 						</Grid.Column>
 					))}
 				</Grid>
@@ -35,7 +40,7 @@ export default function ListAddress({ reloadAddresses, setReloadAddresses }) {
 	);
 }
 
-function Address({ address, logout, setReloadAddresses }) {
+function Address({ address, logout, setReloadAddresses, openModal }) {
 	const [loadingDelete, setLoadingDelete] = useState(false);
 	const deleteAddress = async () => {
 		setLoadingDelete(true);
@@ -54,7 +59,9 @@ function Address({ address, logout, setReloadAddresses }) {
 			</p>
 			<p> {address.phone} </p>
 			<div className='actions'>
-				<Button primary>Editar</Button>
+				<Button primary onClick={() => openModal(`Editar ${address.title}`, address)}>
+					Editar
+				</Button>
 				<Button loading={loadingDelete} onClick={deleteAddress}>
 					Eliminar
 				</Button>
