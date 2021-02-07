@@ -8,8 +8,8 @@ import ChangeNameForm from '../Components/Account/ChangeNameForm/ChangeNameForm'
 import ChangeEmailForm from '../Components/Account/ChangeEmailForm/ChangeEmailForm';
 import ChangePasswordForm from '../Components/Account/ChangePasswordForm/ChangePasswordForm';
 import BasicModal from '../Components/Modal/BasicModal';
-import AddressForm from '../Components/Account/AddressForm/AddressForm';
-import ListAddress from '../Components/Account/ListAddress/ListAddress';
+import AddressForm from '../Components/Account/AddressForm';
+import ListAddress from '../Components/Account/ListAddress';
 
 export default function account() {
 	const [user, setUser] = useState(undefined);
@@ -54,10 +54,11 @@ function Addresses() {
 	const [showModal, setShowModal] = useState(false);
 	const [titleModal, setTitleModal] = useState('');
 	const [formModal, setFormModal] = useState(null);
+	const [reloadAddresses, setReloadAddresses] = useState(false);
 
 	const openModal = (title) => {
 		setTitleModal(title);
-		setFormModal(<AddressForm setShowModal={setShowModal} />);
+		setFormModal(<AddressForm setShowModal={setShowModal} setReloadAddresses={setReloadAddresses} />);
 		setShowModal(true);
 	};
 
@@ -68,7 +69,7 @@ function Addresses() {
 				<Icon name='plus' link onClick={() => openModal('Nueva Direccion')} />
 			</div>
 			<div className='data'>
-				<ListAddress />
+				<ListAddress reloadAddresses={reloadAddresses} setReloadAddresses={setReloadAddresses} />
 			</div>
 			<BasicModal show={showModal} setShow={setShowModal} title={titleModal}>
 				{formModal}
