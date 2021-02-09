@@ -2,9 +2,9 @@ BucketName:
 game-ecommerce-udemy
 
 Policy:
-S3BucketEcommerce
+S3BucketAccessGameEcommerce
 
 Keys: 
-User: strapi-game-ecommerce
-ID: AKIAS6MZ4SOKWGZQ2E72
-Pass: 3M9RbsI7t+IKTxJHMH17jxF6oa7kafjFxAC/3B/S
+User: StrapiGameEcommerce
+ID de clave de acceso: AKIAS6MZ4SOKZHLLTU32
+Clave de acceso secreta: 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
