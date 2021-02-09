@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Container, Menu, Grid, Icon, Label } from 'semantic-ui-react';
+import { Container, Menu, Grid, Icon } from 'semantic-ui-react';
 import Link from 'next/link';
 import BasicModal from '../../Modal/BasicModal';
 import Auth from '../../Auth';
 import useAuth from '../../../Hook/useAuth';
 import { getMeApi } from '../../../Api/User';
 import { getPlatformsApi } from '../../../Api/Platform';
+import { map } from 'lodash';
 
 export default function MenuWeb() {
 	const [showModal, setShowModal] = useState(false);
@@ -36,7 +37,7 @@ export default function MenuWeb() {
 			<Container>
 				<Grid>
 					<Grid.Column className='menu__left' width={6}>
-						<MenuPlatforms />
+						<MenuPlatforms platforms={platforms} />
 					</Grid.Column>
 					<Grid.Column className='menu__right' width={10}>
 						{user !== undefined && <MenuOptions onShowModal={onShowModal} user={user} logout={logout} />}
@@ -50,18 +51,16 @@ export default function MenuWeb() {
 	);
 }
 
-function MenuPlatforms() {
+function MenuPlatforms({ platforms }) {
 	return (
 		<Menu>
-			<Link href='/playstation'>
-				<Menu.Item as='a'>Play Station</Menu.Item>
-			</Link>
-			<Link href='/xbox'>
-				<Menu.Item as='a'>XBOX</Menu.Item>
-			</Link>
-			<Link href='/switch'>
-				<Menu.Item as='a'>Switch</Menu.Item>
-			</Link>
+			{map(platforms, (platform) => (
+				<Link href={`/games/${platform.url}`} key={platform._id}>
+					<Menu.Item as='a' name={platform.url}>
+						{platform.title}
+					</Menu.Item>
+				</Link>
+			))}
 		</Menu>
 	);
 }
