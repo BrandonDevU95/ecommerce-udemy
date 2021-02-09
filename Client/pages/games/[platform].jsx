@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { size } from 'lodash';
 import { Loader } from 'semantic-ui-react';
 import ListGames from '../../Components/ListGames';
+import Pagination from '../../Components/Pagination';
 
 const limitPerPage = 10;
 
@@ -22,7 +23,7 @@ export default function Platform() {
 	useEffect(() => {
 		(async () => {
 			if (query.platform) {
-				const response = await getGamesPlatformApi(query.platform, limitPerPage, 0);
+				const response = await getGamesPlatformApi(query.platform, limitPerPage, getStartItem());
 				setGames(response);
 			}
 		})();
@@ -44,6 +45,14 @@ export default function Platform() {
 				</div>
 			)}
 			{size(games) > 0 && <ListGames games={games} />}
+
+			{totalGames ? (
+				<Pagination
+					totalGames={totalGames}
+					page={query.page ? parseInt(query.page) : 1}
+					limitPerPage={limitPerPage}
+				/>
+			) : null}
 		</BasicLayout>
 	);
 }
