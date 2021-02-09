@@ -7,7 +7,7 @@ import { Loader } from 'semantic-ui-react';
 import ListGames from '../../Components/ListGames';
 import Pagination from '../../Components/Pagination';
 
-const limitPerPage = 10;
+const limitPerPage = 20;
 
 export default function Platform() {
 	const [games, setGames] = useState(null);
