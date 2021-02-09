@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getGamesPlatformApi } from '../../Api/Game';
+import { getGamesPlatformApi, getTotalGamesPlatformApi } from '../../Api/Game';
 import BasicLayout from '../../Layouts/BasicLayout';
 import { useRouter } from 'next/router';
 import { size } from 'lodash';
@@ -10,7 +10,14 @@ const limitPerPage = 10;
 
 export default function Platform() {
 	const [games, setGames] = useState(null);
+	const [totalGames, setTotalGames] = useState(null);
 	const { query } = useRouter();
+
+	const getStartItem = () => {
+		const currentPage = parseInt(query.page);
+		if (!query.page || currentPage === 1) return 0;
+		else return currentPage * limitPerPage - limitPerPage;
+	};
 
 	useEffect(() => {
 		(async () => {
@@ -18,6 +25,13 @@ export default function Platform() {
 				const response = await getGamesPlatformApi(query.platform, limitPerPage, 0);
 				setGames(response);
 			}
+		})();
+	}, [query]);
+
+	useEffect(() => {
+		(async () => {
+			const response = await getTotalGamesPlatformApi(query.platform);
+			setTotalGames(response);
 		})();
 	}, [query]);
 
