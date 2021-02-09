@@ -1,0 +1,10 @@
+BucketName:
+game-ecommerce-udemy
+
+Policy:
+S3BucketEcommerce
+
+Keys: 
+User: strapi-game-ecommerce
+ID: AKIAS6MZ4SOKWGZQ2E72
+Pass: 3M9RbsI7t+IKTxJHMH17jxF6oa7kafjFxAC/3B/S
