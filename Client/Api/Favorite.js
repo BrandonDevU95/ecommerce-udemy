@@ -46,10 +46,21 @@ export async function deleteFavoriteApi(idUser, idGame, logout) {
 					'Content-Type': 'application/json',
 				},
 			};
-			const result = authFetch(url, params, logout);
+			const result = await authFetch(url, params, logout);
 			return result;
 		} else {
 		}
+	} catch (error) {
+		console.log(error);
+		return null;
+	}
+}
+
+export async function getFavoriteApi(idUser, logout) {
+	try {
+		const url = `${BASE_PATH}/favorites?users_permissions_user=${idUser}`;
+		const result = await authFetch(url, null, logout);
+		return result;
 	} catch (error) {
 		console.log(error);
 		return null;
