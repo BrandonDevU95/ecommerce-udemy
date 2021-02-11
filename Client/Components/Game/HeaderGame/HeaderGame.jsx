@@ -4,6 +4,7 @@ import { isFavoriteApi, addFavoriteApi, deleteFavoriteApi } from '../../../Api/F
 import { size } from 'lodash';
 import classNames from 'classnames';
 import useAuth from '../../../Hook/useAuth';
+import useCart from '../../../Hook/useCart';
 
 export default function HeaderGame({ game }) {
 	return (
@@ -22,6 +23,7 @@ function Info({ game }) {
 	const [isFavorite, setIsFavorite] = useState(false);
 	const [reloadFavorite, setReloadFavorite] = useState(false);
 	const { auth, logout } = useAuth();
+	const { addProductCart } = useCart();
 
 	useEffect(() => {
 		(async () => {
@@ -69,7 +71,9 @@ function Info({ game }) {
 						<p>${(game.price - Math.floor(game.price * game.discount) / 100).toFixed(2)}</p>
 					</div>
 				</div>
-				<Button className='header-game__buy-btn'>Comprar</Button>
+				<Button className='header-game__buy-btn' onClick={() => addProductCart(game.url)}>
+					Comprar
+				</Button>
 			</div>
 		</Fragment>
 	);

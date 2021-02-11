@@ -1,11 +1,11 @@
 import { useMemo, useEffect, useState } from 'react';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import AuthContext from '../Context/AuthContext';
 import jwtDecode from 'jwt-decode';
 import { useRouter } from 'next/router';
 import CartContext from '../Context/CartContext';
 import { setToken, getToken, removeToken } from '../Api/Token';
-import { getProductsCart } from '../Api/Cart';
+import { getProductsCart, addProductCartApi } from '../Api/Cart';
 import '../Scss/global.scss';
 import 'semantic-ui-css/semantic.min.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -59,13 +59,22 @@ export default function MyApp({ Component, pageProps }) {
 	const cartData = useMemo(
 		() => ({
 			productCart: 0,
-			addProductCart: () => null,
+			addProductCart: (product) => addProduct(product),
 			getProductsCart: getProductsCart,
 			removeProductCart: () => null,
 			removeAllProductsCart: () => null,
 		}),
 		[]
 	);
+
+	const addProduct = (product) => {
+		const token = getToken();
+		if (token) {
+			addProductCartApi(product);
+		} else {
+			toast.warning('Favor de iniciar sesión');
+		}
+	};
 
 	if (auth === undefined) {
 		return null;
