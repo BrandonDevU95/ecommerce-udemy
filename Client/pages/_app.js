@@ -5,6 +5,7 @@ import jwtDecode from 'jwt-decode';
 import { useRouter } from 'next/router';
 import CartContext from '../Context/CartContext';
 import { setToken, getToken, removeToken } from '../Api/Token';
+import { getProductsCart } from '../Api/Cart';
 import '../Scss/global.scss';
 import 'semantic-ui-css/semantic.min.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -59,7 +60,7 @@ export default function MyApp({ Component, pageProps }) {
 		() => ({
 			productCart: 0,
 			addProductCart: () => null,
-			getProductsCart: () => null,
+			getProductsCart: getProductsCart,
 			removeProductCart: () => null,
 			removeAllProductsCart: () => null,
 		}),
