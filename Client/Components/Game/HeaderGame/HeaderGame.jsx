@@ -1,6 +1,6 @@
 import { useState, useEffect, Fragment } from 'react';
 import { Grid, Image, Icon, Button } from 'semantic-ui-react';
-import { isFavoriteApi, addFavoriteApi } from '../../../Api/Favorite';
+import { isFavoriteApi, addFavoriteApi, deleteFavoriteApi } from '../../../Api/Favorite';
 import { size } from 'lodash';
 import classNames from 'classnames';
 import useAuth from '../../../Hook/useAuth';
@@ -39,8 +39,11 @@ function Info({ game }) {
 		}
 	};
 
-	const removeFavorite = () => {
-		console.log('Eliminando');
+	const removeFavorite = async () => {
+		if (auth) {
+			await deleteFavoriteApi(auth.idUser, game.id, logout);
+			setReloadFavorite(true);
+		}
 	};
 
 	return (
