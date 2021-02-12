@@ -18,8 +18,40 @@ export default function AddressShipping() {
 	}, []);
 
 	return (
-		<div>
-			<h1>Address ....</h1>
+		<div className='address-shipping'>
+			<div className='title'>Direccion</div>
+			<div className='data'>
+				{size(addresses) === 0 ? (
+					<h3>
+						No hay ninguna dirección:{' '}
+						<Link href='/account'>
+							<a>Añadir dirección</a>
+						</Link>
+					</h3>
+				) : (
+					<Grid>
+						{map(addresses, (address) => (
+							<Grid.Column key={address.id} mobile='16' tablet='8' computer='4'>
+								<Address address={address} />
+							</Grid.Column>
+						))}
+					</Grid>
+				)}
+			</div>
+		</div>
+	);
+}
+
+function Address({ address }) {
+	return (
+		<div className='address'>
+			<p>{address.title}</p>
+			<p>{address.name}</p>
+			<p>{address.address}</p>
+			<p>
+				{address.city}, {address.state} {address.postalCode}{' '}
+			</p>
+			<p>{address.phone}</p>
 		</div>
 	);
 }
