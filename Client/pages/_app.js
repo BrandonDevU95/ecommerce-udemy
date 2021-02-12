@@ -5,7 +5,7 @@ import jwtDecode from 'jwt-decode';
 import { useRouter } from 'next/router';
 import CartContext from '../Context/CartContext';
 import { setToken, getToken, removeToken } from '../Api/Token';
-import { getProductsCart, addProductCartApi, countProductsCart } from '../Api/Cart';
+import { getProductsCart, addProductCartApi, countProductsCart, removeProductCart } from '../Api/Cart';
 import '../Scss/global.scss';
 import 'semantic-ui-css/semantic.min.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -63,16 +63,10 @@ export default function MyApp({ Component, pageProps }) {
 		[auth]
 	);
 
-	const cartData = useMemo(
-		() => ({
-			productCart: totalProductsCart,
-			addProductCart: (product) => addProduct(product),
-			getProductsCart: getProductsCart,
-			removeProductCart: () => null,
-			removeAllProductsCart: () => null,
-		}),
-		[totalProductsCart]
-	);
+	const removeProduct = (product) => {
+		removeProductCart(product);
+		setReloadCart(true);
+	};
 
 	const addProduct = (product) => {
 		const token = getToken();
@@ -83,6 +77,17 @@ export default function MyApp({ Component, pageProps }) {
 			toast.warning('Favor de iniciar sesión');
 		}
 	};
+
+	const cartData = useMemo(
+		() => ({
+			productCart: totalProductsCart,
+			addProductCart: (product) => addProduct(product),
+			getProductsCart: getProductsCart,
+			removeProductCart: (product) => removeProduct(product),
+			removeAllProductsCart: () => null,
+		}),
+		[totalProductsCart]
+	);
 
 	if (auth === undefined) {
 		return null;
