@@ -182,6 +182,18 @@
     exenv "^1.2.2"
     prop-types "^15.6.2"
 
+"@stripe/react-stripe-js@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@stripe/react-stripe-js/-/react-stripe-js-1.2.2.tgz#efbb1230f3e1d4726ed6e80637b081aa82a4d63e"
+  integrity sha512-ziIdXSl4zRo8Pgq9TlnGPRVAe6Fjh/vkVqFr6eWS/ylr7vUE4zHFTE3rlo7Ys+fGM5WFcC+nFbXsPBCh1iG/6w==
+  dependencies:
+    prop-types "^15.7.2"
+
+"@stripe/stripe-js@^1.12.1":
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-1.12.1.tgz#baa5f1d8cfdbda174a0419cb42d2f1c8d622a7eb"
+  integrity sha512-CE602Mzx6DnUHGrL+S9Kk7UK6674BCYlklh9F2NWU6ue0xdVzRTfFCuL5LHvs7Plicw5rsjuDhJ9sIdwFBVCIQ==
+
 "@types/json-schema@^7.0.5", "@types/json-schema@^7.0.6":
   version "7.0.6"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.6.tgz#f4c7ec43e81b319a9815115031709f26987891f0"
