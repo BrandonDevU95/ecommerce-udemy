@@ -11,11 +11,11 @@ module.exports = {
   async create(ctx) {
     const { token, products, idUser, addressShipping } = ctx.request.body;
     let totalPayment = 0;
-    products.forEach(products, (product) => {
+    products.forEach((product) => {
       totalPayment = totalPayment + product.price;
     });
 
-    const charge = await stripe.charge.create({
+    const charge = await stripe.charges.create({
       amount: totalPayment * 100,
       currency: "USD",
       source: token.id,
@@ -26,16 +26,16 @@ module.exports = {
     for await (const product of products) {
       const data = {
         game: product.id,
-        user: idUser,
+        users_permissions_user: idUser,
         totalPayment,
         idPayment: charge.id,
         addressShipping,
       };
-      const validData = await createStrapi.entityValidator.validateEntity(
-        strapi.models.order,
+      const validData = await strapi.entityValidator.validateEntityCreation(
+        strapi.models.Order,
         data
       );
-      const entry = await strapi.query("order").create(validData);
+      const entry = await strapi.query("Order").create(validData);
       createOrder.push(entry);
     }
     return createOrder;
