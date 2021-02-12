@@ -5,6 +5,7 @@ import Payment from '../Components/Cart/Payment';
 import SummaryCart from '../Components/Cart/SummaryCart/SummaryCart';
 import useCart from '../Hook/useCart';
 import BasicLayout from '../Layouts/BasicLayout';
+import Seo from '../Components/Seo';
 
 export default function cart() {
 	const { getProductsCart } = useCart();
@@ -40,6 +41,7 @@ function FullCart({ products }) {
 
 	return (
 		<BasicLayout className='cart'>
+			<Seo />
 			<SummaryCart products={productsData} reloadCart={reloadCart} setReloadCart={setReloadCart} />
 			<AddressShipping setAddress={setAddress} />
 			{address && <Payment products={productsData} address={address} />}

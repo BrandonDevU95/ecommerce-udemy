@@ -5,6 +5,7 @@ import { getFavoriteApi } from '../Api/Favorite';
 import useAuth from '../Hook/useAuth';
 import ListGames from '../Components/ListGames';
 import { Loader } from 'semantic-ui-react';
+import Seo from '../Components/Seo';
 
 export default function wishlist() {
 	const [games, setGames] = useState(null);
@@ -27,6 +28,7 @@ export default function wishlist() {
 
 	return (
 		<BasicLayout className='wishlist'>
+			<Seo title='Wishlist' />
 			<div className='wishlist__block'>
 				<div className='title'>Lista de Deseos</div>
 				<div className='data'>
