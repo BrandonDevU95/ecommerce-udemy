@@ -37,7 +37,7 @@ function OrderList({ orders }) {
 	return (
 		<Grid>
 			{map(orders, (order) => (
-				<Grid.Column mobile='16' tablet='6' computer='8'>
+				<Grid.Column key={order.id} mobile='16' tablet='6' computer='8'>
 					<Order order={order} />
 				</Grid.Column>
 			))}
