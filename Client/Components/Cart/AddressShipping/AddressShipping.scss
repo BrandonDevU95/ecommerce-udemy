@@ -36,5 +36,14 @@
 				color: $primary;
 			}
 		}
+
+		&.active {
+			border-color: $primary;
+			background-color: #ffe2d4;
+
+			p {
+				border-color: $primary;
+			}
+		}
 	}
 }
