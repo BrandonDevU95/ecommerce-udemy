@@ -2,6 +2,7 @@ import React from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { STRIPE_TOKEN } from '../../../Utils/Constants';
+import FormPayment from './FormPayment';
 
 const stripePrimise = loadStripe(STRIPE_TOKEN);
 
@@ -11,7 +12,7 @@ export default function Payment({ products, address }) {
 			<div className='title'>Pago</div>
 			<div className='data'>
 				<Elements stripe={stripePrimise}>
-					<p>Formulario</p>
+					<FormPayment products={products} address={address} />
 				</Elements>
 			</div>
 		</div>
