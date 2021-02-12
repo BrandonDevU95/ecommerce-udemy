@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getGameByUrlApi } from '../Api/Game';
+import SummaryCart from '../Components/Cart/SummaryCart/SummaryCart';
 import useCart from '../Hook/useCart';
 import BasicLayout from '../Layouts/BasicLayout';
 
@@ -21,8 +22,6 @@ function EmptyCart() {
 function FullCart({ products }) {
 	const [productsData, setProductsData] = useState(null);
 
-	console.log(productsData);
-
 	useEffect(() => {
 		(async () => {
 			const productsTemp = [];
@@ -35,7 +34,7 @@ function FullCart({ products }) {
 	}, []);
 	return (
 		<BasicLayout className='cart'>
-			<h1>Carrito...</h1>
+			<SummaryCart products={productsData} />
 		</BasicLayout>
 	);
 }
