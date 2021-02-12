@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getGameByUrlApi } from '../Api/Game';
+import AddressShipping from '../Components/Cart/AddressShipping';
 import SummaryCart from '../Components/Cart/SummaryCart/SummaryCart';
 import useCart from '../Hook/useCart';
 import BasicLayout from '../Layouts/BasicLayout';
@@ -38,6 +39,7 @@ function FullCart({ products }) {
 	return (
 		<BasicLayout className='cart'>
 			<SummaryCart products={productsData} reloadCart={reloadCart} setReloadCart={setReloadCart} />
+			<AddressShipping />
 		</BasicLayout>
 	);
 }
